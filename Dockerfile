@@ -7,8 +7,9 @@ RUN apt-get update && \
     apt-get install -y couchdb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    
-# Define mountable directories.
-VOLUME ["/var/lib/couchdb"]
 
-CMD ["couchdb"]
+RUN mkdir /var/run/couchdb    
+# Define mountable directories.
+VOLUME ["/data"]
+
+CMD ["couchdb","-a","/data/couchdb.ini"]
