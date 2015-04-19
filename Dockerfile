@@ -11,23 +11,23 @@ FROM quay.io/inok/baseimage
 # Define mountable directories.
 VOLUME ["/data"]
 
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get install -y libuv-dev libyaml-dev libssl-dev cmake git build-essential
+WORKDIR /tmp 
+# WORKDIR /tmp/h2o
 
-WORKDIR /tmp
-RUN git clone https://github.com/kazuho/h2o.git
-WORKDIR /tmp/h2o
-RUN git submodule update --init --recursive
-RUN cmake .
-RUN make h2o 
-RUN mv /tmp/h2o/h2o /usr/sbin/h2o
-RUN mv /tmp/h2o/examples /etc/h2o
-RUN mkdir /var/www
-RUN sed -ri 's/examples\/doc_root/\/var\/www/g' /etc/h2o/h2o.conf
-RUN sed -ri 's/8080/80/g' /etc/h2o/h2o.conf
-
-RUN rm -rf /tmp/h2o
+RUN apt-get update && \
+    apt-get install -y libuv-dev libyaml-dev libssl-dev cmake git build-essential  && \
+    git clone https://github.com/kazuho/h2o.git
+    cd /tmp/h2o
+    git submodule update --init --recursive && \
+    cmake . && \
+    make h2o  && \
+    mv /tmp/h2o/h2o /usr/sbin/h2o && \
+    mv /tmp/h2o/examples /etc/h2o && \
+    mkdir /var/www && \
+    sed -ri 's/examples\/doc_root/\/var\/www/g' /etc/h2o/h2o.conf && \
+    sed -ri 's/8080/80/g' /etc/h2o/h2o.conf && \
+    rm -rf /tmp/h2o && \
+    apt-get clean
 
 # Define mountable directories.
 VOLUME ["/etc/h2o", "/var/www"]
