@@ -24,8 +24,6 @@ RUN apt-get update && \
     mv /tmp/h2o/h2o /usr/sbin/h2o && \
     mv /tmp/h2o/examples /etc/h2o && \
     mkdir /var/www && \
-    sed -ri 's/examples\/doc_root/\/var\/www/g' /etc/h2o/h2o.conf && \
-    sed -ri 's/8080/80/g' /etc/h2o/h2o.conf && \
     rm -rf /tmp/h2o && \
     apt-get clean
 
