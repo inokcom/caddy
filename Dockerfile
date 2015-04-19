@@ -16,8 +16,8 @@ WORKDIR /tmp
 
 RUN apt-get update && \
     apt-get install -y libuv-dev libyaml-dev libssl-dev cmake git build-essential  && \
-    git clone https://github.com/kazuho/h2o.git
-    cd /tmp/h2o
+    git clone https://github.com/kazuho/h2o.git  && \
+    cd /tmp/h2o  && \
     git submodule update --init --recursive && \
     cmake . && \
     make h2o  && \
