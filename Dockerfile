@@ -1,6 +1,6 @@
 # Dockerizing Caddy hhtp2 server
 # https://github.com/mholt/caddy
-# https://github.com/Zenithar/nano-caddy
+https://github.com/abiosoft/caddy-docker/
 FROM alpine:latest
 
 RUN apk add --update openssh-client git tar
@@ -12,7 +12,9 @@ RUN mkdir /caddysrc \
 && chmod 755 /usr/bin/caddy \
 && rm -rf /caddysrc
 
-VOLUME     [ "/caddy" ]
-WORKDIR    [ "/caddy" ]
-ENTRYPOINT [ "/bin/caddy" ]
-CMD        [ "-conf='/caddy/inok_web.cfg" ]
+# RUN mkdir /srv
+# WORKDIR /srv
+
+VOLUME ["/data"]
+ENTRYPOINT ["/usr/bin/caddy"]
+CMD ["--conf", "/data/inok_web.cfg"]
