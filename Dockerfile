@@ -1,6 +1,6 @@
 # Dockerizing Caddy hhtp2 server
 # https://github.com/mholt/caddy
-https://github.com/abiosoft/caddy-docker/
+# https://github.com/abiosoft/caddy-docker/
 FROM alpine:latest
 
 RUN apk add --update openssh-client git tar
