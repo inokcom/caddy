@@ -1,6 +1,7 @@
 # Dockerizing Caddy hhtp2 server
 # https://github.com/mholt/caddy
 # https://github.com/Zenithar/nano-caddy
+FROM alpine:edge
 
 ENV GOPATH /go
 ENV CADDY_TAG v0.7.5
