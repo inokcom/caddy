@@ -1,20 +1,16 @@
 # Dockerizing Caddy hhtp2 server
 # https://github.com/mholt/caddy
 # https://github.com/Zenithar/nano-caddy
-FROM alpine:edge
+FROM alpine:latest
 
-ENV GOPATH /go
-ENV CADDY_TAG v0.7.5
+RUN apk add --update openssh-client git tar
 
-RUN apk add --update musl \
-    && apk add -t build-tools go mercurial git \
-    && mkdir /go \
-    && cd /go \
-    && go get -tags=$CADDY_TAG github.com/mholt/caddy \
-    && mv $GOPATH/bin/caddy /bin \
-    && mkdir /caddy \
-    && apk del --purge build-tools \
-    && rm -rf /go /var/cache/apk/*
+RUN mkdir /caddysrc \
+&& curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
+&& tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /caddysrc \
+&& mv /caddysrc/caddy /usr/bin/caddy \
+&& chmod 755 /usr/bin/caddy \
+&& rm -rf /caddysrc
 
 VOLUME     [ "/caddy" ]
 WORKDIR    [ "/caddy" ]
