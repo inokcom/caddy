@@ -12,9 +12,7 @@ RUN mkdir /caddysrc \
 && chmod 755 /usr/bin/caddy \
 && rm -rf /caddysrc
 
-# RUN mkdir /srv
-# WORKDIR /srv
-
 VOLUME ["/data"]
+WORKDIR ["/data"]
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/data/inok_web.cfg"]
