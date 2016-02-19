@@ -1,4 +1,4 @@
-# Dockerizing Caddy hhtp2 server
+# Dockerizing Caddy hhtp2 server ok
 # https://github.com/mholt/caddy
 # https://github.com/abiosoft/caddy-docker/
 FROM alpine:latest
