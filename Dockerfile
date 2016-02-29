@@ -5,17 +5,12 @@ FROM alpine:latest
 
 RUN apk add --update openssh-client git tar
 
-# RUN mkdir /caddysrc \
-# && curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
-# && tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /caddysrc \
-# && mv /caddysrc/caddy /usr/bin/caddy \
-# && chmod 755 /usr/bin/caddy \
-# && rm -rf /caddysrc
 RUN mkdir /caddysrc \
-&& curl -sL -o /caddysrc "https://github.com/mholt/caddy/releases/download/v0.8.2/caddy_linux_amd64.tar.gz"
-&& tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /usr/bin \
-# && chmod 755 /usr/bin/caddy \
-# && rm -rf /caddysrc
+&& curl -sL -o /caddysrc/caddy_linux_amd64.tar.gz "http://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
+&& tar -xf /caddysrc/caddy_linux_amd64.tar.gz -C /caddysrc \
+&& mv /caddysrc/caddy /usr/bin/caddy \
+&& chmod 755 /usr/bin/caddy \
+&& rm -rf /caddysrc
 
 VOLUME ["/data"]
 WORKDIR ["/data"]
